@@ -56,16 +56,10 @@ public class MainActivity extends AppCompatActivity {
     public TextWatcher getTextWatcher() {
         return new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-
-            //TODO: börja tracka vilka som senast öppnats, collapsa alla när dom inte används. Hantera fel
-            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override   //TODO: börja tracka vilka som senast öppnats, collapsa alla när dom inte används. Hantera fel
             public void afterTextChanged(Editable c) {
                 String selected = c.toString().trim();
                 if (selected.isEmpty()) {
@@ -80,13 +74,17 @@ public class MainActivity extends AppCompatActivity {
                             if(selectedParts[0].equals(groupList.get(i).toString())){
                                 expandableListView.expandGroup(i);
                                 i = temp;
+                            }else{
+                                expandableListView.collapseGroup(i);
                             }
                         }if(selectedParts.length>1){
 
                             List<String> tempList = mobileCollection.get(groupList.get(temp)); //detta blir då alltså childList för vår specifika key.
                             for(int j = 0; j<tempList.size(); j++){
-                                if(selectedParts[1].equals(tempList.get(j)));
+                                if(selectedParts[1].equals(tempList.get(j))){
                                     colorChildGreen(groupList.get(temp), mobileCollection.get(groupList.get(temp)).get(j));
+                                }
+
                             }
                     }
 
