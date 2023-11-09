@@ -3,6 +3,7 @@ package com.example.lab1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -63,46 +65,46 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override   //TODO: börja tracka vilka som senast öppnats, collapsa alla när dom inte används. Hantera fel
+            @Override   //TODO: börja tracka vilka som senast öppnats, färga/ofärga barn. Hantera fel
             public void afterTextChanged(Editable c) {
                 String selected = c.toString().trim();
+                String[] selectedPartsTemp = selected.split("/");
+                String[] selectedParts = Arrays.stream(selectedPartsTemp).filter(s -> !s.isEmpty()).toArray(String[]::new); // Denna tar ba bort alla null-objekt i arrayen, tydligen funkade ej replaceAll så de får bli såhär
+                Log.d("MESSAGE", selectedParts[0]);
                 if (selected.isEmpty()) { //Kollar om input är empty
                     input.setText("/");
-                } else {
-                    if(selected.endsWith("/")){
-                        String[] selectedPartsTemp = selected.split("/");
-                        String[] selectedParts = Arrays.stream(selectedPartsTemp).filter(s -> !s.isEmpty()).toArray(String[]::new); // Denna tar ba bort alla null-objekt i arrayen, tydligen funkade ej replaceAll så de får bli såhär
-                        Log.d("MESSAGE", selectedParts[0]);
-                        int temp = 0;
-                        for(int i = 0; i<groupList.size(); i++){
-                            if(selectedParts[0].equals(groupList.get(i))){
-                                expandableListView.expandGroup(i);
-                                lastParent = currParent;
-                                currParent = i;
-
-                                if(lastParent != -1) {
-                                    expandableListView.collapseGroup(lastParent);
-                                }
-
-                            }else{
-                                for(int a = 0; i < groupList.size(); a++) { // Kollapsar alla grupper om ingen grupp ska expanderas
-                                    expandableListView.collapseGroup(a);
-                                }
-                            }
-                        }if(selectedParts.length>1){
-                            List<String> tempList = mobileCollection.get(groupList.get(currParent)); //detta blir då alltså childList för vår specifika key.
-                            for(int j = 0; j<tempList.size(); j++){
-                                if(tempList.get(j).contains(selectedParts[1])) {
-                                    colorChildGreen(currParent, j);
-                                    lastChild = currChild;
-                                    currChild = j;
-
-                                    if(lastChild != -1) {
-                                        deColorChild(lastParent, lastChild);
+                } else { if(selected.endsWith("/") && selected.length() > 1){
+                            for(int i = 0; i<groupList.size(); i++) {
+                                if (selectedParts[0].equals(groupList.get(i))) {
+                                    expandableListView.expandGroup(i);
+                                    lastParent = currParent;
+                                    currParent = i;
+                                    break;
                                     }
+                                    }if(selectedParts.length>1){
+                                    Log.d("MESSAGE", "Hej jag körs");
 
-                                }
-                            }
+                                    //List<String> tempList = mobileCollection.get(groupList.get(currParent)); //detta blir då alltså childList för vår specifika key.
+                                        for(int j = 0; j < mobileCollection.get(groupList.get(currParent)).size(); j++){
+                                            Log.d("MESSAGE", mobileCollection.get(groupList.get(currParent)).get(j));
+                                            if(mobileCollection.get(groupList.get(currParent)).get(j).equals(selectedParts[1])) {
+                                                colorChildGreen(currParent, j);
+                                                deColorInput();
+                                                lastChild = currChild;
+                                                currChild = j;
+
+                                                if(lastChild != -1) {
+                                                    deColorChild(lastParent, lastChild);
+                                                    }
+
+                                                }else{
+                                                colorInputRed();
+                                            }
+                                        }
+                                    }
+                    }else if(!selected.endsWith("/") && selectedParts.length<2){
+                        for(int a = 0; a < groupList.size(); a++) { // Kollapsar alla grupper om ingen grupp ska expanderas
+                            expandableListView.collapseGroup(a);
                         }
                     }
                 }
@@ -110,12 +112,21 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    public void colorChildGreen(int parentID, int childID) {
+    private void deColorInput() {
+        input.setBackgroundColor(Color.WHITE);
+    }
+    private void colorInputRed() {
+        input.setBackgroundColor(Color.RED);
+    }
 
+    public void colorChildGreen(int parentID, int childID) {
+        int childIndex = expandableListView.getFlatListPosition(ExpandableListView.getPackedPositionForChild(parentID, childID));
+        expandableListView.getChildAt(childIndex).setBackgroundColor(Color.GREEN);
     }
 
     public void deColorChild(int parentID, int childID){
-
+        int childIndex = expandableListView.getFlatListPosition(ExpandableListView.getPackedPositionForChild(parentID, childID));
+        expandableListView.getChildAt(childIndex).setBackgroundColor(Color.WHITE);
     }
 
 
