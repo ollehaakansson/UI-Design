@@ -26,7 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
     private EditText input;
-    
+    private int currChild = -1;
+    private int currParent = -1;
+    private int lastChild;
+    private int lastParent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override   //TODO: börja tracka vilka som senast öppnats, collapsa alla när dom inte används. Hantera fel
             public void afterTextChanged(Editable c) {
                 String selected = c.toString().trim();
-                if (selected.isEmpty()) {
+                if (selected.isEmpty()) { //Kollar om input är empty
                     input.setText("/");
                 } else {
                     if(selected.endsWith("/")){
@@ -71,34 +75,46 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MESSAGE", selectedParts[0]);
                         int temp = 0;
                         for(int i = 0; i<groupList.size(); i++){
-                            if(selectedParts[0].equals(groupList.get(i).toString())){
+                            if(selectedParts[0].equals(groupList.get(i))){
                                 expandableListView.expandGroup(i);
-                                i = temp;
-                            }else{
-                                expandableListView.collapseGroup(i);
-                            }
-                        }if(selectedParts.length>1){
+                                lastParent = currParent;
+                                currParent = i;
 
-                            List<String> tempList = mobileCollection.get(groupList.get(temp)); //detta blir då alltså childList för vår specifika key.
-                            for(int j = 0; j<tempList.size(); j++){
-                                if(selectedParts[1].equals(tempList.get(j))){
-                                    colorChildGreen(groupList.get(temp), mobileCollection.get(groupList.get(temp)).get(j));
+                                if(lastParent != -1) {
+                                    expandableListView.collapseGroup(lastParent);
                                 }
 
+                            }else{
+                                for(int a = 0; i < groupList.size(); a++) { // Kollapsar alla grupper om ingen grupp ska expanderas
+                                    expandableListView.collapseGroup(a);
+                                }
                             }
-                    }
+                        }if(selectedParts.length>1){
+                            List<String> tempList = mobileCollection.get(groupList.get(currParent)); //detta blir då alltså childList för vår specifika key.
+                            for(int j = 0; j<tempList.size(); j++){
+                                if(tempList.get(j).contains(selectedParts[1])) {
+                                    colorChildGreen(currParent, j);
+                                    lastChild = currChild;
+                                    currChild = j;
 
+                                    if(lastChild != -1) {
+                                        deColorChild(lastParent, lastChild);
+                                    }
+
+                                }
+                            }
+                        }
                     }
                 }
             };
         };
     }
 
-    public void colorChildGreen(String parent, String child) {
+    public void colorChildGreen(int parentID, int childID) {
 
     }
 
-    public void deColorChild(String parent, String child){
+    public void deColorChild(int parentID, int childID){
 
     }
 
