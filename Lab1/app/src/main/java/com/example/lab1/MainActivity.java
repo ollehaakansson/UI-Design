@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override   //TODO: börja tracka vilka som senast öppnats, färga/ofärga barn. Hantera fel
             public void afterTextChanged(Editable c) {
+                deColorInput();
                 String selected = c.toString().trim();
                 String[] selectedPartsTemp = selected.split("/");
                 String[] selectedParts = Arrays.stream(selectedPartsTemp).filter(s -> !s.isEmpty()).toArray(String[]::new); // Denna tar ba bort alla null-objekt i arrayen, tydligen funkade ej replaceAll så de får bli såhär
@@ -82,9 +83,6 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                     }
                                     }if(selectedParts.length>1){
-                                    Log.d("MESSAGE", "Hej jag körs");
-
-                                    //List<String> tempList = mobileCollection.get(groupList.get(currParent)); //detta blir då alltså childList för vår specifika key.
                                         for(int j = 0; j < mobileCollection.get(groupList.get(currParent)).size(); j++){
                                             Log.d("MESSAGE", mobileCollection.get(groupList.get(currParent)).get(j));
                                             if(mobileCollection.get(groupList.get(currParent)).get(j).equals(selectedParts[1])) {
@@ -92,11 +90,9 @@ public class MainActivity extends AppCompatActivity {
                                                 deColorInput();
                                                 lastChild = currChild;
                                                 currChild = j;
-
                                                 if(lastChild != -1) {
                                                     deColorChild(lastParent, lastChild);
-                                                    }
-
+                                                }
                                                 }else{
                                                 colorInputRed();
                                             }
