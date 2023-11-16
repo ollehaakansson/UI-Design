@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private ExpandableListView.OnGroupClickListener getGroupListener() {
         return new ExpandableListView.OnGroupClickListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) { //fungerar ej att manuellt collapsa en grupp, förstår ej varför
 
                 hasClicked = true;
                 parentCounter++;
@@ -67,9 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int i = 0; i < parentCounter1.length; i++){
                     if(parentCounter1[i] >= 2){
-                        Log.d("MESSAGE", "Jag körs");
                         collaplseChosenGroup(groupPosition);
-                        Log.d("MESSAGE", "Jag körs 2");
                         i = 0;
                         break;
                     }
@@ -100,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 colorChildGreen(groupPosition, childPosition);
                 deColorInput();
                 input.setText("/" + expandableListAdapter.getGroup(groupPosition).toString() + "/" + expandableListAdapter.getChild(groupPosition, childPosition).toString() + "/");
-                
-
                 return true;
             }
         };
@@ -114,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override   //TODO: börja tracka vilka som senast öppnats, färga/ofärga barn. Hantera fel
             public void afterTextChanged(Editable c) {
                 deColorInput();
                 String selected = c.toString().trim();
@@ -146,13 +141,12 @@ public class MainActivity extends AppCompatActivity {
                                                     deColorChild(lastParent, lastChild);
                                                 }
                                                 }else if (!hasClicked && !mobileCollection.get(groupList.get(currParent)).get(j).equals(selectedParts[1])){
-                                                Log.d("MESSAGE", "hej jag körs");
                                                 colorInputRed();
                                             }
                                         }
                                     }
                     }else if(!selected.endsWith("/") && selectedParts.length<2){
-                        for(int a = 0; a < groupList.size(); a++) { // Kollapsar alla grupper om ingen grupp ska expanderas
+                        for(int a = 0; a < groupList.size(); a++) {
                             for(int b = 0; b < groupList.get(a).length(); b++){
                                 expandableListView.collapseGroup(a);
                                 deColorChild(a, b);
