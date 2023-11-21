@@ -21,7 +21,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        accountRegistration.addField("password"); //ex
-
+        accountRegistration = findViewById(R.id.accountReg);
+        accountRegistration.addField(Row_Type.FIRSTNAME);
+        accountRegistration.addField(Row_Type.LASTNAME);
+        accountRegistration.addField(Row_Type.PASSWORD);
+        accountRegistration.addField(Row_Type.EMAIL);
     }
 }

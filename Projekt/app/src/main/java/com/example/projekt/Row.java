@@ -34,7 +34,8 @@ public class Row extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void makeRow() {
+    public EditText makeRow(Row_Type row_type) {
+        this.row_type = row_type;
         editText = new EditText(getContext());
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         editText.setLayoutParams(layoutParams);
@@ -59,16 +60,18 @@ public class Row extends LinearLayout {
             default:
                 Log.d("MESSAGE", "404, type not found");
         }
-        addView(editText);
+        return editText;
+        //addView(editText);
     }
 
     public Row_Type getRow_type() {
+
         return row_type;
     }
 
     public void setRow_type(Row_Type row_type) {
+        Log.d("MESSAGE", "setRow körs");
         this.row_type = row_type;
-        makeRow();
     }
 
     public EditText getEditText() {
