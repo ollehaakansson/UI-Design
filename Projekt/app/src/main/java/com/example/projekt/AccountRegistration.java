@@ -54,7 +54,7 @@ public class AccountRegistration extends LinearLayout {
         Row_Type temp = getFieldTypeFromName(fieldName);
         if(temp !=null) {
             selectedRowTypes.add(temp);
-            drawFields();
+            drawFields(temp);
         }else {
             Log.d("MESSAGE", fieldName);
         }
@@ -64,13 +64,13 @@ public class AccountRegistration extends LinearLayout {
         Row_Type temp = getFieldTypeFromName(fieldName);
         if(temp != null && selectedRowTypes.contains(temp)) {
                 selectedRowTypes.remove(temp);
-                drawFields();
+                drawFields(temp);
         }else {
             Log.d("MESSAGE", fieldName);
         }
     }
 
-    public void drawFields(){
-
+    public void drawFields(Row_Type row_type){
+        row.setRow_type(row_type);
     }
 }
