@@ -14,17 +14,21 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
 
     private AccountRegistration accountRegistration;
-    private Row row;
-    private Row_Type row_type;
+    //private Row row;
+    //private Row_Type row_type;
+    private PasswordStrength passwordStrength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         accountRegistration = findViewById(R.id.accountReg);
+        passwordStrength = findViewById(R.id.passwordStrength);
+
         accountRegistration.addField(Row_Type.FIRSTNAME);
         accountRegistration.addField(Row_Type.LASTNAME);
         accountRegistration.addField(Row_Type.PASSWORD);
+        passwordStrength.makeBox();
         accountRegistration.addField(Row_Type.EMAIL);
     }
 }

@@ -4,6 +4,7 @@ public enum Row_Type {
     FIRSTNAME,
     LASTNAME,
     PASSWORD,
-    EMAIL,
+    STRENGHT,
+    EMAIL
 
 }

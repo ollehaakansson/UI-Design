@@ -14,4 +14,11 @@
 
     </com.example.projekt.AccountRegistration>
 
+    <com.example.projekt.PasswordStrength
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordStrength">
+
+    </com.example.projekt.PasswordStrength>
+
 </LinearLayout>

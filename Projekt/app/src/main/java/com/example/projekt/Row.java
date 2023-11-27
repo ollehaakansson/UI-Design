@@ -1,37 +1,54 @@
 package com.example.projekt;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-/* Varje row har en typ & en edittext
-    typen tas från enum Row_Type & edittexten bestäms därifrån också
-    När setRow_Type kallas på så kallar den i sin tur på makeRow som skapar en rad i vår layout med passande edittext & typ.
- */
+import java.util.ArrayList;
+
 public class Row extends LinearLayout {
 
     private Row_Type row_type;
+    private Strength_Type strength_Type;
     private EditText editText;
+    private ArrayList<Row_Type> selectedRowTypes;
+    private PasswordStrength passwordStrength;
 
     public Row(Context context) {
         super(context);
+        init();
     }
 
     public Row(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public Row(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     public Row(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
+    private void init() {
+        setOrientation(VERTICAL);
+        selectedRowTypes = new ArrayList<>();
+        TextView PasswordStrengthTextView = new TextView(getContext()); // Initialisera TextView
+        addView(PasswordStrengthTextView); // Lägg till TextView i layout
+
     }
 
     public EditText makeRow(Row_Type row_type) {
@@ -44,6 +61,7 @@ public class Row extends LinearLayout {
             case PASSWORD:
                 editText.setHint("Password");
                 editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                Log.d("MESSAGE", "hje hej kommer till lösenord");
                 break;
             case EMAIL:
                 editText.setHint("Email");
@@ -58,19 +76,17 @@ public class Row extends LinearLayout {
                 editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
                 break;
             default:
+                // Här kan du hantera andra typer om nödvändigt
                 Log.d("MESSAGE", "404, type not found");
         }
         return editText;
-        //addView(editText);
     }
 
     public Row_Type getRow_type() {
-
         return row_type;
     }
 
     public void setRow_type(Row_Type row_type) {
-        Log.d("MESSAGE", "setRow körs");
         this.row_type = row_type;
     }
 
@@ -82,4 +98,6 @@ public class Row extends LinearLayout {
         this.editText = editText;
     }
 
+
 }
+
