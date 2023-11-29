@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Add all Input Fields here:
         accountRegistration.addNewInputField("First Name", RowType.FIRSTNAME);
+        accountRegistration.addNewInputField("Password", RowType.PASSWORD);
+
 
         //Custom field here:
         accountRegistration.addNewInputField("custom", RowType.CUSTOM);

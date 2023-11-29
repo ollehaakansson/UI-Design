@@ -18,7 +18,7 @@ public class Row extends LinearLayout {
     private String rowName;
 
     /*
-    All the cunstructors and Init
+    All the constructors and Init
      */
     public Row(Context context) {
         super(context);
