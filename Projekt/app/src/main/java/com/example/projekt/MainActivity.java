@@ -3,6 +3,7 @@ package com.example.projekt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.EditText;
 
 /*
        AccountRegistration ska extend:a layout , vi ska ha en myRow som ska ärva från AccountRegistration
@@ -17,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
     //private Row row;
     //private Row_Type row_type;
     private PasswordStrength passwordStrength;
+    private EditText passwordField;
+
+    //TODO: Se till så man kan välja hur man bestämmer styrkan på ett lösenord från Mainactivity.
+    // Håll koll på olika fält i accountregistration.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +30,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         accountRegistration = findViewById(R.id.accountReg);
         passwordStrength = findViewById(R.id.passwordStrength);
+        passwordStrength.setUpPasswordStrengthListener(passwordField);
+
 
         accountRegistration.addField(Row_Type.FIRSTNAME);
         accountRegistration.addField(Row_Type.LASTNAME);
         accountRegistration.addField(Row_Type.PASSWORD);
-        passwordStrength.makeBox();
+        //passwordStrength.makeBox();
         accountRegistration.addField(Row_Type.EMAIL);
     }
 }

@@ -16,6 +16,8 @@ public class AccountRegistration extends LinearLayout {
     private Row row;
     private Row_Type row_type;
     private ArrayList<Row_Type> selectedRowTypes;
+    private HashMap<String, Row_Type> allRows;
+
 
     public AccountRegistration(Context context) {
         super(context);

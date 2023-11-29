@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,41 @@ public class PasswordStrength extends View{
     public PasswordStrength(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
+    public void setUpPasswordStrengthListener(EditText passwordField) {
+        passwordField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Inget behov av att implementera detta
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Inget behov av att implementera detta
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateViewBasedOnStrength(s.toString());
+            }
+        });
+    }
+
+    private void updateViewBasedOnStrength(String password) {
+        Strength_Type strength = calculateStrength(password);
+        switch (strength) {
+            case WEAK:
+                setBackgroundColor(Color.RED);
+                break;
+            case MEDIUM:
+                setBackgroundColor(Color.YELLOW);
+                break;
+            case STRONG:
+                setBackgroundColor(Color.GREEN);
+                break;
+        }
+    }
+
     public void makeBox() {
         passwordStrengthView = new View(getContext());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -57,25 +93,6 @@ public class PasswordStrength extends View{
         }
     }
 
-    private class PasswordStrengthWatcher implements TextWatcher {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            String password = s.toString();
-            Strength_Type strength = PasswordStrength.calculateStrength(password);
-            updateUIWithPasswordStrength(strength);
-        }
-
-    }
-
     private static boolean containsUppercase(String password) {
         return password.matches(".*[A-Z].*");
     }
@@ -90,22 +107,5 @@ public class PasswordStrength extends View{
 
     private static boolean containsDigit(String password) {
         return password.matches(".*[1234567890].*");
-    }
-
-    void updateUIWithPasswordStrength(Strength_Type strength) {
-        // Uppdatera  i TextView
-        Log.d("MESSAGE", "Skriver ut lösenstyrkaa");Log.d("MESSAGE", strength.toString());
-        //strengthTextView.setText("Password is " + strength.toString());
-        switch (strength) {
-            case WEAK:
-                passwordStrengthView.setBackgroundColor(Color.RED);
-                break;
-            case MEDIUM:
-                passwordStrengthView.setBackgroundColor(Color.YELLOW);
-                break;
-            case STRONG:
-                passwordStrengthView.setBackgroundColor(Color.GREEN);
-                break;
-        }
     }
 }
