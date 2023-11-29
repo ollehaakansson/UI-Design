@@ -50,7 +50,7 @@ public class AccountRegistration extends LinearLayout {
 
     }
 
-    // Om man vill lägga till en custom så kallar vi på denna funktionen som uppdaterar en row som vi tidigare skapat som inte har några värden.
+    // If you want to add a custom field we call this function which updates a row which we previously made.
     public void addCustomInputField(String inputFieldName, int inputType){
         if (getInputField(inputFieldName) != null) {
             getInputField(inputFieldName).setCustomVariables(inputFieldName, inputType);
@@ -67,7 +67,7 @@ public class AccountRegistration extends LinearLayout {
         }
     }
 
-    // Uppdaterar input-fältens view, tar bort alla pot input fält och fyller med nya
+    //Updates the input-fields view, removes all old fields and fills with new ones
     public void updateInputFields() {
         removeAllViews();
         for (String rowName : AllInputFields.keySet()) {
@@ -76,15 +76,19 @@ public class AccountRegistration extends LinearLayout {
             row.setRowView(editText);
             addView(editText);
         }
-        updateCreateAccountButton(); //Vi behöver ju enbart en create account knapp om det finns fält.
+        updateCreateAccountButton();
     }
 
-    //Uppdaterar knappens view
+    //Updates the buttons view
     public void updateCreateAccountButton(){
         createAccountButton.setText("Create Account");
         addView(createAccountButton);
     }
 
+
+    /*
+    Functions to handle creating accounts
+     */
     public void makeObligatory(String rowName){
         if(!rowName.isEmpty()) {
             if(AllInputFields.get(rowName) != null){
@@ -99,6 +103,15 @@ public class AccountRegistration extends LinearLayout {
             temp.add(rowName);
         }
         return temp;
+    }
+
+    public boolean obligatoryFieldsFilled(){
+        for (String rowName : obligatoryFieldNames) {
+            if (!row.hasText(AllInputFields.get(rowName).getEditText())) {
+                return false;
+            }
+        }
+        return true;
     }
     private Row getInputField(String fieldName) {
         return AllInputFields.get(fieldName);

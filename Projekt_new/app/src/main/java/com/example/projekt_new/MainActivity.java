@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         accountRegistration = findViewById(R.id.AccountRegistration);
 
+        // TODO: Make sure you cannot create account without obligatory logic working
+        // Password strength meter
 
         // Add all Input Fields here:
         accountRegistration.addNewInputField("First Name", RowType.FIRSTNAME);
@@ -30,14 +32,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean obligatoryFieldsFilled() {
                 //Insert your logic here
-
-                //eg
-                ArrayList<String> AllInputFieldNames = accountRegistration.getAllFieldNames();
-                accountRegistration.makeObligatory("example");
-                return true;
+                //example
+                accountRegistration.makeObligatory("First Name");
+                return accountRegistration.obligatoryFieldsFilled();
             }
         };
-
-
     }
 }

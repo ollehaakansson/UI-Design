@@ -40,10 +40,11 @@ public class Row extends LinearLayout {
         init();
     }
 
-    public void init(){
+    public void init() {
         this.rowView = this;
     }
 
+    //Updates the custom field with the correct variables
     public void setCustomVariables(String inputFieldName, int inputType) {
         setHint(inputFieldName);
         setInputType(inputType);
@@ -53,7 +54,7 @@ public class Row extends LinearLayout {
         editText = new EditText(getContext());
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 
-        switch (rowType) {
+        switch (rowType) { //Add more case:s if needed
             case FIRSTNAME:
             case LASTNAME:
                 editText.setHint(rowName);
@@ -68,10 +69,7 @@ public class Row extends LinearLayout {
                 editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
             case CUSTOM:
-                Log.d("createRow", "Jag komm till custom");
-                break;
             default:
-                Log.d("Kom till default", "Wrong type");
                 break;
         }
         return editText;
@@ -109,18 +107,23 @@ public class Row extends LinearLayout {
         this.rowName = rowName;
     }
 
-    public void setFontColor(int fontColor){
+    public void setFontColor(int fontColor) {
         editText.setTextColor(fontColor);
     }
 
-    public void setFontSize(int fontSize){
+    public void setFontSize(int fontSize) {
         editText.setTextSize(fontSize);
     }
+
     public void setHint(String inputFieldName) {
         editText.setHint(inputFieldName);
     }
 
     public void setInputType(int inputType) {
         editText.setInputType(inputType);
+    }
+
+    public boolean hasText(EditText editText) { //returns true if it has text
+        return !editText.getText().toString().isEmpty();
     }
 }
