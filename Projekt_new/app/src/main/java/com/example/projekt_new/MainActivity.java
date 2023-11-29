@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     private AccountRegistration accountRegistration;
@@ -21,6 +24,20 @@ public class MainActivity extends AppCompatActivity {
         //Custom field here:
         accountRegistration.addNewInputField("custom", RowType.CUSTOM);
         accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
+
+        //Insert custom logic for what fields are obligatory etc
+        CreateAccount createAccount = new CreateAccount() {
+            @Override
+            public boolean obligatoryFieldsFilled() {
+                //Insert your logic here
+
+                //eg
+                ArrayList<String> AllInputFieldNames = accountRegistration.getAllFieldNames();
+                accountRegistration.makeObligatory("example");
+                return true;
+            }
+        };
+
 
     }
 }

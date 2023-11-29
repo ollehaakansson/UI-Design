@@ -49,8 +49,6 @@ public class Row extends LinearLayout {
         setInputType(inputType);
     }
 
-    /* TODO: Implement other types of Rows, Implement custom
-     */
     public EditText createRow(String rowName, RowType rowType) {
         editText = new EditText(getContext());
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
