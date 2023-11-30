@@ -114,6 +114,7 @@ public class Row extends LinearLayout {
     }
 
     public void setFontSize(int fontSize) {
+        Log.d("Row", String.valueOf(fontSize));
         editText.setTextSize(fontSize);
     }
 

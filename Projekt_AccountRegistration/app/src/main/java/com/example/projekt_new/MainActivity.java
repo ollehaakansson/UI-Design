@@ -21,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         accountRegistration = findViewById(R.id.AccountRegistration);
 
-        //Set color and fontsize
-        accountRegistration.setFontSizeAndColor(30, Color.BLACK);
-
         // Add all Input Fields here:
         accountRegistration.addNewInputField("First name", RowType.FIRSTNAME);
         accountRegistration.addNewInputField("Last name", RowType.LASTNAME);
@@ -35,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         //Custom field here:
         accountRegistration.addNewInputField("custom", RowType.CUSTOM);
         accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
+
+        //Set color and fontsize
+        accountRegistration.setFontSizeAndColor(30, Color.BLACK);
 
         //Access all views from here
         View tempView = accountRegistration.getRowView("First name");
