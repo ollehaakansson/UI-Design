@@ -44,7 +44,6 @@ public class PassWordField extends androidx.appcompat.widget.AppCompatEditText {
     public View getPassWordFieldView() {
         return passWordFieldView;
     }
-
     public void setPassWordFieldView(View passWordView) {
         this.passWordFieldView = passWordView;
     }

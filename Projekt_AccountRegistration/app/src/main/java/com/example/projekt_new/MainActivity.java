@@ -13,6 +13,8 @@ import java.util.LinkedHashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TODO: Se till att det går att komma åt kontona som skapas från main, behöver ej sparas men ska kunna kommas åt.
+    // Skapa en klass typ user som är alla input-fields.
     private AccountRegistration accountRegistration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

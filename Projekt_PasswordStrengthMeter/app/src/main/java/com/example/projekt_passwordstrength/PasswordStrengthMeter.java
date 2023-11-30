@@ -11,6 +11,7 @@ public class PasswordStrengthMeter extends LinearLayout {
 
     PassWordField passWordField;
     StrengthMeter strengthMeter;
+    private StrengthValidator strengthValidator;
     public PasswordStrengthMeter(Context context) {
         super(context);
         init();
@@ -35,11 +36,29 @@ public class PasswordStrengthMeter extends LinearLayout {
         setOrientation(VERTICAL);
     }
 
-    public void testMethod(){
+    public void startTheSHow(){
         passWordField = new PassWordField(getContext());
         strengthMeter = new StrengthMeter(getContext());
         addView(passWordField);
         addView(strengthMeter);
+    }
+
+
+
+    //setter and getters
+    public void updateStrengthMeterProgress(int progress){
+        strengthMeter.UpdateProgressBarProgress(progress);
+    }
+    public void updateStrengthMeterColor(int color) {
+        strengthMeter.setProgressBarColor(color);
+    }
+
+    public void setPasswordStrengthMeterColors(int startColor , int weakColor, int mediumColor, int strongColor) {
+        strengthMeter.setProgressBarColors(startColor, weakColor, mediumColor, strongColor);
+    }
+
+    public void setStrengthValidator(StrengthValidator strengthValidatorTemp) {
+        this.strengthValidator = strengthValidatorTemp;
     }
 
 }

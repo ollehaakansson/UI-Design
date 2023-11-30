@@ -38,21 +38,21 @@ public class StrengthMeter extends ProgressBar {
     public void init(){
         this.setMax(100);
         this.setProgress(0);
-
         startColor = Color.WHITE;
         weakColor = Color.RED;
         mediumColor = Color.rgb(255, 165, 0); //Orange
         strongColor = Color.GREEN;
         setProgressBarColor(startColor);
-
         this.progressBarView = this;
     }
 
     public void setProgressBarColor(int color){
         if (getProgressDrawable() != null) {
             getProgressDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
-
         }
+    }
+    public void UpdateProgressBarProgress(int progress) {
+        setProgress(progress);
     }
     public void setProgressBarColors(int startColor, int weakColor, int mediumColor, int strongColor) {
         this.startColor = startColor;
