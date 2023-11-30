@@ -1,5 +1,7 @@
 package com.example.projekt_new;
 
+import static android.graphics.ColorSpace.Model.RGB;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -59,6 +61,11 @@ public class AccountRegistration extends LinearLayout {
         if (getInputField(inputFieldName) != null) {
             getInputField(inputFieldName).setCustomVariables(inputFieldName, inputType);
         }
+    }
+
+    public void setFontSizeAndColor(int fontSize, int color) {
+        row.setFontSize(fontSize);
+        row.setFontColor(color);
     }
 
     public void addNewInputField(String rowName, RowType rowType) {
@@ -135,5 +142,10 @@ public class AccountRegistration extends LinearLayout {
 
     public void setCreateAccount(CreateAccount createAccountTemp){
         this.createAccount = createAccountTemp;
+    }
+
+    public View getRowView(String rowName) {
+        return AllInputFields.get(rowName).getRowView();
+
     }
 }

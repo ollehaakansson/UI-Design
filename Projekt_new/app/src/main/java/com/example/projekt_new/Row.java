@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+import java.util.HashMap;
+
 public class Row extends LinearLayout {
 
     private RowType rowType;
@@ -126,5 +128,4 @@ public class Row extends LinearLayout {
     public boolean hasText(EditText editText) { //returns true if it has text
         return !editText.getText().toString().isEmpty();
     }
-
 }
