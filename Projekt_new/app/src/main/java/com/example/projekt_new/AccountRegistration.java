@@ -2,6 +2,7 @@ package com.example.projekt_new;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +21,8 @@ public class AccountRegistration extends LinearLayout {
     private ArrayList<String> obligatoryFieldNames;
     private TextView textView;
     private Button createAccountButton;
+
+    private CreateAccount createAccount;
 
     public AccountRegistration(Context context) {
         super(context);
@@ -47,6 +50,7 @@ public class AccountRegistration extends LinearLayout {
         obligatoryFieldNames = new ArrayList<>();
         textView = new TextView(getContext());
         createAccountButton = new Button(getContext());
+        createAccount = new DefaultCreateAccount();
 
     }
 
@@ -82,6 +86,17 @@ public class AccountRegistration extends LinearLayout {
     //Updates the buttons view
     public void updateCreateAccountButton(){
         createAccountButton.setText("Create Account");
+        createAccountButton.setOnClickListener(v -> {
+            if(createAccount.obligatoryFieldsFilled()){
+
+                for (Row row : AllInputFields.values()) { //Empties all the fields.
+                    EditText editText = row.getEditText();
+                    if (editText != null) {
+                        editText.setText("");
+                    }
+                }
+            }
+        });
         addView(createAccountButton);
     }
 
@@ -89,6 +104,7 @@ public class AccountRegistration extends LinearLayout {
     /*
     Functions to handle creating accounts
      */
+
     public void makeObligatory(String rowName){
         if(!rowName.isEmpty()) {
             if(AllInputFields.get(rowName) != null){
@@ -117,4 +133,7 @@ public class AccountRegistration extends LinearLayout {
         return AllInputFields.get(fieldName);
     }
 
+    public void setCreateAccount(CreateAccount createAccountTemp){
+        this.createAccount = createAccountTemp;
+    }
 }

@@ -126,4 +126,5 @@ public class Row extends LinearLayout {
     public boolean hasText(EditText editText) { //returns true if it has text
         return !editText.getText().toString().isEmpty();
     }
+
 }

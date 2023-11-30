@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,27 +18,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         accountRegistration = findViewById(R.id.AccountRegistration);
 
-        // TODO: Make sure you cannot create account without obligatory logic working
-        // Password strength meter
+        // TODO: Password strength meter
 
         // Add all Input Fields here:
-        accountRegistration.addNewInputField("First Name", RowType.FIRSTNAME);
+        accountRegistration.addNewInputField("First name", RowType.FIRSTNAME);
+        accountRegistration.addNewInputField("Last name", RowType.LASTNAME);
         accountRegistration.addNewInputField("Password", RowType.PASSWORD);
+
+        // Add all obligatory fields here:
+        accountRegistration.makeObligatory("First name");
 
 
         //Custom field here:
-        accountRegistration.addNewInputField("custom", RowType.CUSTOM);
-        accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
+        //accountRegistration.addNewInputField("custom", RowType.CUSTOM);
+        //accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
 
         //Insert custom logic for what fields are obligatory etc
-        CreateAccount createAccount = new CreateAccount() {
+        accountRegistration.setCreateAccount(new CreateAccount() {
             @Override
             public boolean obligatoryFieldsFilled() {
-                //Insert your logic here
-                //example
-                accountRegistration.makeObligatory("First Name");
-                return accountRegistration.obligatoryFieldsFilled();
+                //Insert custom logic
+                return true;
             }
-        };
+        });
+
     }
 }
