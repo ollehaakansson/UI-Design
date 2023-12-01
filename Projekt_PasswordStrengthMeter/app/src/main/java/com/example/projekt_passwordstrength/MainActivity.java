@@ -22,16 +22,18 @@ public class MainActivity extends AppCompatActivity {
         passwordStrengthMeter.setPasswordStrengthMeterColors(Color.WHITE, Color.RED, Color.rgb(255, 165, 0), Color.GREEN);
 
         //Insert custom logic for progress and when to switch colors.
-        passwordStrengthMeter.setStrengthValidator(new StrengthValidator() {
+        /*passwordStrengthMeter.setStrengthValidator(new StrengthValidator() {
             @Override
             public int decideProgress() {
+
                 return 0;
             }
 
             @Override
             public int decideColor(int progress) {
+
                 return 0;
             }
-        });
+        }); */
     }
 }

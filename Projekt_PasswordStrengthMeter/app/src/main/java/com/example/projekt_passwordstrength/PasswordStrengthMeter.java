@@ -1,7 +1,10 @@
 package com.example.projekt_passwordstrength;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -11,6 +14,8 @@ public class PasswordStrengthMeter extends LinearLayout {
 
     PassWordField passWordField;
     StrengthMeter strengthMeter;
+    DefaultStrengthValidator defaultStrengthValidator;
+    String passWord;
     private StrengthValidator strengthValidator;
     public PasswordStrengthMeter(Context context) {
         super(context);
@@ -34,18 +39,43 @@ public class PasswordStrengthMeter extends LinearLayout {
 
     public void init(){
         setOrientation(VERTICAL);
+
     }
 
     public void startTheSHow(){
         passWordField = new PassWordField(getContext());
         strengthMeter = new StrengthMeter(getContext());
+        defaultStrengthValidator = new DefaultStrengthValidator();
+        passWordField.addTextChangedListener(getTextWatcher());
         addView(passWordField);
         addView(strengthMeter);
     }
 
+    private TextWatcher getTextWatcher(){
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
-    //setter and getters
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d("Textwatcher", "Jag kom hit");
+                int progress = defaultStrengthValidator.decideProgress(s.toString());
+                strengthMeter.UpdateProgressBarProgress(progress);
+
+                int color = defaultStrengthValidator.decideColor(progress);
+                strengthMeter.setProgressBarColor(color);
+            }
+        };
+    }
+        //setter and getters
+
     public void updateStrengthMeterProgress(int progress){
         strengthMeter.UpdateProgressBarProgress(progress);
     }
