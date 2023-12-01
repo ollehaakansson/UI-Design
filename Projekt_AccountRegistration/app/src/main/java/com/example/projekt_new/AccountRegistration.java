@@ -66,8 +66,12 @@ public class AccountRegistration extends LinearLayout {
 
     public void setFontSizeAndColor(int fontSize, int color) {
         Log.d("Accountregistration", String.valueOf(fontSize));
-        row.setFontSize(fontSize);
-        row.setFontColor(color);
+
+        for (String rowName : AllInputFields.keySet()) {
+            AllInputFields.get(rowName).setFontColor(color);
+            AllInputFields.get(rowName).setFontSize(fontSize);
+
+        }
     }
 
     public void addNewInputField(String rowName, RowType rowType) {

@@ -26,14 +26,15 @@ public class MainActivity extends AppCompatActivity {
         // Add all Input Fields here:
         accountRegistration.addNewInputField("First name", RowType.FIRSTNAME);
         accountRegistration.addNewInputField("Last name", RowType.LASTNAME);
+        accountRegistration.addNewInputField("Email", RowType.EMAIL);
         accountRegistration.addNewInputField("Password", RowType.PASSWORD);
 
         // Add all obligatory fields here:
         accountRegistration.makeObligatory("First name");
 
         //Custom field here:
-        accountRegistration.addNewInputField("custom", RowType.CUSTOM);
-        accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
+        //accountRegistration.addNewInputField("custom", RowType.CUSTOM);
+        //accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
 
         //Set color and fontsize
         accountRegistration.setFontSizeAndColor(30, Color.BLACK);
