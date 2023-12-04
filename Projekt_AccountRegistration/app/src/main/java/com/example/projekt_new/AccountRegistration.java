@@ -100,8 +100,8 @@ public class AccountRegistration extends LinearLayout {
     public void updateCreateAccountButton(){
         createAccountButton.setText("Create Account");
         createAccountButton.setOnClickListener(v -> {
+            createAccount.makeButtonDoStuff();
             if(createAccount.obligatoryFieldsFilled()){
-
                 for (Row row : AllInputFields.values()) { //Empties all the fields.
                     EditText editText = row.getEditText();
                     if (editText != null) {

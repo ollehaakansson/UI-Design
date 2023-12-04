@@ -5,4 +5,9 @@ public class DefaultCreateAccount implements CreateAccount {
     public boolean obligatoryFieldsFilled() {
         return true;
     }
+
+    @Override
+    public void makeButtonDoStuff() {
+
+    }
 }

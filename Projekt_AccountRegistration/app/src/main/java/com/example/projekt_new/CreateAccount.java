@@ -4,4 +4,6 @@ import java.util.ArrayList;
 
 public interface CreateAccount {
     public boolean obligatoryFieldsFilled ();
+
+    public void makeButtonDoStuff();
 }

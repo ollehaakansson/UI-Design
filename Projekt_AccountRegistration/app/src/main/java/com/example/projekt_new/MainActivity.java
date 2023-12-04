@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Se till att det går att komma åt kontona som skapas från main, behöver ej sparas men ska kunna kommas åt.
     // Skapa en klass typ user som är alla input-fields.
+
     private AccountRegistration accountRegistration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         accountRegistration.makeObligatory("First name");
 
         //Custom field here:
-        //accountRegistration.addNewInputField("custom", RowType.CUSTOM);
-        //accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
+        accountRegistration.addNewInputField("custom", RowType.CUSTOM);
+        accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
 
         //Set color and fontsize
         accountRegistration.setFontSizeAndColor(30, Color.BLACK);
@@ -48,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean obligatoryFieldsFilled() {
                 //Insert custom logic
                 return true;
+            }
+
+            @Override
+            public void makeButtonDoStuff() {
+                //Insert logic if you want button to do something more
             }
         });
 
