@@ -38,6 +38,14 @@ public class PassWordField extends androidx.appcompat.widget.AppCompatEditText {
 
     //Setters and Getters
 
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public String getInput() {
+        return this.input;
+    }
+
     public void setColor(int color) {
         setTextColor(color);
     }

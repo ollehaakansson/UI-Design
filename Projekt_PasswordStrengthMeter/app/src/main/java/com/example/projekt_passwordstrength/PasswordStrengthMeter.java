@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -15,7 +16,8 @@ public class PasswordStrengthMeter extends LinearLayout {
     PassWordField passWordField;
     StrengthMeter strengthMeter;
     DefaultStrengthValidator defaultStrengthValidator;
-    String passWord;
+    private Button createPasswordButton;
+    private String password;
     private StrengthValidator strengthValidator;
     public PasswordStrengthMeter(Context context) {
         super(context);
@@ -47,8 +49,19 @@ public class PasswordStrengthMeter extends LinearLayout {
         strengthMeter = new StrengthMeter(getContext());
         defaultStrengthValidator = new DefaultStrengthValidator();
         passWordField.addTextChangedListener(getTextWatcher());
+        createPasswordButton = new Button(getContext());
+        updateCreatePasswordButton();
+        createPasswordButton.setText("Create Account");
+        password = "test";
         addView(passWordField);
         addView(strengthMeter);
+        addView(createPasswordButton);
+    }
+
+    public void updateCreatePasswordButton(){
+        createPasswordButton.setOnClickListener(v -> {
+            passWordField.setText("");
+        });
     }
 
     private TextWatcher getTextWatcher(){
@@ -71,6 +84,9 @@ public class PasswordStrengthMeter extends LinearLayout {
 
                 int color = defaultStrengthValidator.decideColor(progress);
                 strengthMeter.setProgressBarColor(color);
+
+                passWordField.setInput(s.toString());
+
             }
         };
     }
@@ -91,4 +107,7 @@ public class PasswordStrengthMeter extends LinearLayout {
         this.strengthValidator = strengthValidatorTemp;
     }
 
+    public String getPassword(){
+        return password;
+    }
 }

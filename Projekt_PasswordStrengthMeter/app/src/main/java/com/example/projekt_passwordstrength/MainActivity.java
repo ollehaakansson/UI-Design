@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,8 +22,11 @@ public class MainActivity extends AppCompatActivity {
         // Set custom colors here
         passwordStrengthMeter.setPasswordStrengthMeterColors(Color.WHITE, Color.RED, Color.rgb(255, 165, 0), Color.GREEN);
 
-        //Insert custom logic for progress and when to switch colors.
+        //Acces the password
+        //String password = passwordStrengthMeter.getPassword();
 
+        //Insert custom logic for progress and when to switch colors.
+        /*
         passwordStrengthMeter.setStrengthValidator(new StrengthValidator() {
             @Override
             public int decideProgress(String passWord) {
@@ -49,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
         });
+        
+         */
     }
     }
