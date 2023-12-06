@@ -6,14 +6,14 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
    private int id;
-    private InteractiveSearcher interactiveSearcher;
+    private InteractiveSearcher interactiveSearcherTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        interactiveSearcher = findViewById(R.id.interactiveSearcher);
-        interactiveSearcher = new InteractiveSearcher(this);
+        interactiveSearcherTemp = findViewById(R.id.interactiveSearcher);
+        InteractiveSearcher interactiveSearcher = new InteractiveSearcher(this, interactiveSearcherTemp);
     }
 }
 

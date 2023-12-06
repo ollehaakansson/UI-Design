@@ -3,15 +3,17 @@ package com.example.lab30;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends BaseAdapter {
+public class MyAdapter extends ArrayAdapter {
     private Context context;
     private ArrayList<String> data;
 
     public MyAdapter(Context context, ArrayList<String> data) {
+        super(context, 0, data);
         this.context = context;
         this.data = data;
     }
@@ -32,6 +34,10 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        return new MyListPopUpWindow(context, data.get(position));
+    }
+
+        /*
         MyListPopUpWindow listItemView;
         if (convertView == null) {
             listItemView = new MyListPopUpWindow(context, data.get(position));
@@ -40,5 +46,6 @@ public class MyAdapter extends BaseAdapter {
             listItemView.setResult(data.get(position));
         }
         return listItemView;
-    }
+    }*/
+
 }
