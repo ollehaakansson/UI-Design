@@ -87,7 +87,7 @@ private int id = 0;
     }
     private void performSearch(String input) {
         counter ++;
-        String url = "https://andla.pythonanywhere.com/getnames/" + counter + "/" + input;
+        String url = "https://andla.pythonanywhere.com/getnames/" + counter + "/" + input;  // Konstruera url:en för webbförfrågan.
 
         Thread t = new Thread(new Runnable() { //skapar en ny tråd för att utföra en webbanrop samtidigt som annan kod körs
             @Override
@@ -96,9 +96,9 @@ private int id = 0;
                 String data = getData(url);
 
                 try { //bearbetar JSON-svaret från webben.
-                    JSONObject json = new JSONObject(data);
-                    JSONArray names = json.getJSONArray("result"); //Koveverterar till en JSONArray...
-                    String id = json.getString("id");
+                    JSONObject json = new JSONObject(data);  // arbetar  JSON svaret från web
+                    JSONArray names = json.getJSONArray("result");  // Gör en specifik del av JSON till en jsonArray. 
+                    String id = json.getString("id");  // hämtar en string värde från JSONen for key id.
 
                     if(counter == Integer.parseInt(id)) {
                         theNames.clear();
@@ -127,14 +127,14 @@ private int id = 0;
         t.start();
     }
 
-    public String getData(String newUrl){
-        String result = "";
+    public String getData(String newUrl){  //  hämtar data från given URL
+        String result = ""; // initierar en tom string att spara den hämtade datan i.
         try{
-            URL url = new URL(newUrl);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            URL url = new URL(newUrl); 
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream())); // Öppnar en stream för att läsa från url.
             String line = "";
-            while((line = reader.readLine())!=null)
-                result += line;
+            while((line = reader.readLine())!=null) //läsen varje linje från BF i en loop.
+                result += line; //innehållet av varje rad läggs till i resultatet.
         }catch (IOException e){
             e.getStackTrace();
         }
