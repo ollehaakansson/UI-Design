@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-   private int id;
+
     private InteractiveSearcher interactiveSearcherTemp;
 
     @Override

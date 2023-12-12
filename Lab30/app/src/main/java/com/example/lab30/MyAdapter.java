@@ -37,15 +37,4 @@ public class MyAdapter extends ArrayAdapter {
         return new MyListPopUpWindow(context, data.get(position));
     }
 
-        /*
-        MyListPopUpWindow listItemView;
-        if (convertView == null) {
-            listItemView = new MyListPopUpWindow(context, data.get(position));
-        } else {
-            listItemView = (MyListPopUpWindow) convertView;
-            listItemView.setResult(data.get(position));
-        }
-        return listItemView;
-    }*/
-
 }

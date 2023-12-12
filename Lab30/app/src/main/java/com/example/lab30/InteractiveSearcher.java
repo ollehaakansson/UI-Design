@@ -27,12 +27,10 @@ import java.util.ArrayList;
 public class InteractiveSearcher extends androidx.appcompat.widget.AppCompatEditText {
 
 private Context context;
-private MyListPopUpWindow myListPopUpWindow;
 private MyAdapter myAdapter;
 private ListPopupWindow listPopupWindow;
 private int counter;
 private ArrayList<String> theNames;
-private int id = 0;
     public InteractiveSearcher(@NonNull Context context, InteractiveSearcher interactiveSearcher) {
         super(context);
         this.context = context;
