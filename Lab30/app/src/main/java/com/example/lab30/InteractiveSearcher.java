@@ -31,7 +31,7 @@ private MyAdapter myAdapter;
 private ListPopupWindow listPopupWindow;
 private int counter;
 private ArrayList<String> theNames;
-    public InteractiveSearcher(@NonNull Context context, InteractiveSearcher interactiveSearcher) {
+    public InteractiveSearcher(@NonNull Context context) {
         super(context);
         this.context = context;
         input();
@@ -50,8 +50,7 @@ private ArrayList<String> theNames;
     }
 
     private void input() {
-        theNames = new ArrayList<>();
-        counter = 0;
+
         listPopupWindow = new ListPopupWindow(context);
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,12 +76,19 @@ private ArrayList<String> theNames;
            }else {
                String ordSek = s.toString().trim();
                listPopupWindow.setAnchorView((InteractiveSearcher.this));
-
                performSearch(ordSek);
            }
         }
     });
     }
+
+    public void startTheShow(){
+        theNames = new ArrayList<>();
+        counter = 0;
+        input();
+
+    }
+
     private void performSearch(String input) {
         counter ++;
         String url = "https://andla.pythonanywhere.com/getnames/" + counter + "/" + input;  // Konstruera url:en för webbförfrågan.
