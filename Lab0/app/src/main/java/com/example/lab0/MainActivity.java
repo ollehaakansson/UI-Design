@@ -103,6 +103,5 @@ public class MainActivity extends AppCompatActivity {
         stor.addView(rad3);
         stor.addView(rad4);
         setContentView(stor);
-        //setContentView(R.layout.activity_main);
     }
 }
