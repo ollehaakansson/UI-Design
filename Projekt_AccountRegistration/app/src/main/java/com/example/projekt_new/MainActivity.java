@@ -13,9 +13,6 @@ import java.util.LinkedHashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO: Se till att det går att komma åt kontona som skapas från main, behöver ej sparas men ska kunna kommas åt.
-    // Skapa en klass typ user som är alla input-fields.
-
     private AccountRegistration accountRegistration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +26,11 @@ public class MainActivity extends AppCompatActivity {
         accountRegistration.addNewInputField("Last name", RowType.LASTNAME);
         accountRegistration.addNewInputField("Email", RowType.EMAIL);
         accountRegistration.addNewInputField("Password", RowType.PASSWORD);
+        //Custom field here:
+        accountRegistration.addNewInputField("test", RowType.CUSTOM);
 
         // Add all obligatory fields here:
         accountRegistration.makeObligatory("First name");
-
-        //Custom field here:
-        accountRegistration.addNewInputField("custom", RowType.CUSTOM);
-        accountRegistration.addCustomInputField("test", InputType.TYPE_CLASS_TEXT);
 
         //Set color and fontsize
         accountRegistration.setFontSizeAndColor(30, Color.BLACK);
@@ -43,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         //Access all views from here
         View tempView = accountRegistration.getRowView("First name");
 
+        //Access the created account
+        //ArrayList<String> userInfo = accountRegistration.getAccountInputs();
+
+        /*
         //Insert custom logic for what fields are obligatory etc
         accountRegistration.setCreateAccount(new CreateAccount() {
             @Override
@@ -56,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 //Insert logic if you want button to do something more
             }
         });
+        */
 
     }
 }

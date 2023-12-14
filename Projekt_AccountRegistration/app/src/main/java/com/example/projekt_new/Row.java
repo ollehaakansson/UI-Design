@@ -46,12 +46,6 @@ public class Row extends LinearLayout {
         this.rowView = this;
     }
 
-    //Updates the custom field with the correct variables
-    public void setCustomVariables(String inputFieldName, int inputType) {
-        setHint(inputFieldName);
-        setInputType(inputType);
-    }
-
     public EditText createRow(String rowName, RowType rowType) {
         editText = new EditText(getContext());
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
@@ -72,6 +66,8 @@ public class Row extends LinearLayout {
                 break;
             case CUSTOM:
             default:
+                editText.setHint(rowName);
+                editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
                 break;
         }
         return editText;

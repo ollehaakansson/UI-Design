@@ -18,14 +18,13 @@ import java.util.Set;
 
 public class AccountRegistration extends LinearLayout {
 
-    private RowType rowType;
     private Row row;
     private LinkedHashMap<String, Row> AllInputFields;
     private ArrayList<String> obligatoryFieldNames;
     private TextView textView;
     private Button createAccountButton;
-
     private CreateAccount createAccount;
+    private User user;
 
     public AccountRegistration(Context context) {
         super(context);
@@ -57,20 +56,10 @@ public class AccountRegistration extends LinearLayout {
 
     }
 
-    // If you want to add a custom field we call this function which updates a row which we previously made.
-    public void addCustomInputField(String inputFieldName, int inputType){
-        if (getInputField(inputFieldName) != null) {
-            getInputField(inputFieldName).setCustomVariables(inputFieldName, inputType);
-        }
-    }
-
     public void setFontSizeAndColor(int fontSize, int color) {
-        Log.d("Accountregistration", String.valueOf(fontSize));
-
         for (String rowName : AllInputFields.keySet()) {
             AllInputFields.get(rowName).setFontColor(color);
             AllInputFields.get(rowName).setFontSize(fontSize);
-
         }
     }
 
@@ -102,22 +91,24 @@ public class AccountRegistration extends LinearLayout {
         createAccountButton.setOnClickListener(v -> {
             createAccount.makeButtonDoStuff();
             if(createAccount.obligatoryFieldsFilled()){
+                ArrayList<String> newUserInfo = new ArrayList<>();
                 for (Row row : AllInputFields.values()) { //Empties all the fields.
-                    EditText editText = row.getEditText();
-                    if (editText != null) {
-                        editText.setText("");
+                    String temp = row.getEditText().getText().toString().trim();
+                    newUserInfo.add(temp);
+                    if (row.getEditText() != null) {
+                        row.getEditText().setText("");
                     }
+                }
+                if (!newUserInfo.isEmpty()){
+                    user.createUser(newUserInfo);
                 }
             }
         });
         addView(createAccountButton);
     }
-
-
     /*
     Functions to handle creating accounts
      */
-
     public void makeObligatory(String rowName){
         if(!rowName.isEmpty()) {
             if(AllInputFields.get(rowName) != null){
@@ -125,7 +116,6 @@ public class AccountRegistration extends LinearLayout {
             }
         }
     }
-
     public ArrayList<String> getAllFieldNames(){
         ArrayList<String> temp = new ArrayList<>();
         for (String rowName : AllInputFields.keySet()){
@@ -133,7 +123,6 @@ public class AccountRegistration extends LinearLayout {
         }
         return temp;
     }
-
     public boolean obligatoryFieldsFilled(){
         for (String rowName : obligatoryFieldNames) {
             if (!row.hasText(AllInputFields.get(rowName).getEditText())) {
@@ -152,6 +141,8 @@ public class AccountRegistration extends LinearLayout {
 
     public View getRowView(String rowName) {
         return AllInputFields.get(rowName).getRowView();
-
+    }
+    public ArrayList<String> getAccountInputs(){
+        return user.getUserInfo();
     }
 }
